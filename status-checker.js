@@ -18,6 +18,15 @@ import { checkIfNoMovesLeft } from './board-printer.js';
     Otherwise, return false
 */
 function checkRow(board, player, rowNumber) {
+    // getting the row we care about
+    const row = board[rowNumber];
+
+    //checking if all 3 positions in this row are equal to player
+    if (row[0] === player && row[1] === player && row[2] === player) {
+        return true;
+    }
+
+    return false;
 }
 
 /*
@@ -29,6 +38,16 @@ function checkRow(board, player, rowNumber) {
     Otherwise, return false
 */
 function checkColumn(board, player, columnNumber) {
+    //checking the same column in each of the 3 rows
+    if (
+        board[0][columnNumber] === player &&
+        board[1][columnNumber] === player &&
+        board[2][columnNumber] === player 
+    ) {
+        return true;
+    }
+
+    return false
 }
 
 /*
@@ -40,6 +59,20 @@ function checkColumn(board, player, columnNumber) {
 */
 function checkDiagonal(board, player) {
     // It may be easier to use an if statement than a loop here
+    //Main diagonal: (0,0), (1,1), (2,2)
+    const mainDiagonal =
+        board[0][0] === player &&
+        board[1][1] === player &&
+        board[2][2] === player; 
+    
+    //Anti-diagonal: (0,2), (1,1), (2,0)
+    const antiDiagonal =
+        board[0][2] === player &&
+        board[1][1] === player &&
+        board[2][0] === player; 
+    
+    //If either diagonal is filled by the player, they win on a diagonal
+    return mainDiagonal || antiDiagonal;
 }
 
 
